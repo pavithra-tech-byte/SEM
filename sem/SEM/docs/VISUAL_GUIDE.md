@@ -1,0 +1,430 @@
+# 🎨 Event Manager - Visual Guide
+
+## 📱 App Flow Diagram
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    COLLEGE EVENT MANAGER                     │
+│                    (Progressive Web App)                     │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+        ┌───────────────────────────────────────┐
+        │         First Time Setup              │
+        │  • Enable Notifications               │
+        │  • Choose Theme (Light/Dark)          │
+        │  • Import Existing Events (CSV)       │
+        └───────────────────────────────────────┘
+                            │
+                            ▼
+┌───────────────────────────────────────────────────────────────┐
+│                      MAIN NAVIGATION                          │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐    │
+│  │Dashboard │  │ Events   │  │ Calendar │  │Analytics │    │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘    │
+└───────────────────────────────────────────────────────────────┘
+       │              │              │              │
+       ▼              ▼              ▼              ▼
+┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
+│ Dashboard│   │Event List│   │ Calendar │   │Analytics │
+│  View    │   │   View   │   │   View   │   │   View   │
+└──────────┘   └──────────┘   └──────────┘   └──────────┘
+```
+
+---
+
+## 🏠 Dashboard View
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Welcome back! 👋                                       │
+│  Here's what's happening with your events               │
+├─────────────────────────────────────────────────────────┤
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐ │
+│  │Upcoming  │  │Deadline  │  │This Week │  │ Prize  │ │
+│  │Events    │  │Today     │  │          │  │ Pool   │ │
+│  │   12     │  │    2     │  │    5     │  │ ₹250K  │ │
+│  └──────────┘  └──────────┘  └──────────┘  └────────┘ │
+├─────────────────────────────────────────────────────────┤
+│  ⚠️ DEADLINE TODAY                                      │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ [Poster] CODE-THON '24                          │   │
+│  │          ABC Engineering College                │   │
+│  │          Hackathon | Deadline Today | Score: 85│   │
+│  │          📅 Apr 25 | 📍 Bangalore | 🏆 ₹50K    │   │
+│  └─────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────┤
+│  🔥 HIGH PRIORITY EVENTS                                │
+│  [List of events with priority score 70+]              │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📋 Events List View
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  All Events                                             │
+├─────────────────────────────────────────────────────────┤
+│  Filters:                                               │
+│  [Search...] [Status ▼] [Type ▼] [Date Range ▼]       │
+│  Sort by: [Priority ▼] [↓ Descending]                 │
+├─────────────────────────────────────────────────────────┤
+│  Showing 25 of 50 events                                │
+├─────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ [Poster] HACKFEST '26                    [90]   │   │
+│  │          DEF College of Science                 │   │
+│  │          Hackathon | Open                       │   │
+│  │          📅 Deadline: Apr 25 (3 days left)     │   │
+│  │          📅 May 28-30 | 📍 Online | 🏆 ₹25K    │   │
+│  └─────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ [Poster] INNOVATION CHALLENGE        [72]       │   │
+│  │          PQR University                         │   │
+│  │          Contest | Open                         │   │
+│  │          📅 Deadline: Apr 25 | 🏆 ₹15K         │   │
+│  └─────────────────────────────────────────────────┘   │
+│  [More events...]                                       │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📅 Calendar View
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Calendar                                               │
+│  [← Previous]    April 2024    [Next →]               │
+├─────────────────────────────────────────────────────────┤
+│  Sun   Mon   Tue   Wed   Thu   Fri   Sat              │
+├─────────────────────────────────────────────────────────┤
+│   31    1     2     3     4     5     6                │
+│                                                         │
+│    7    8     9    10    11    12    13                │
+│                          ┌──┐                          │
+│                          │12│                          │
+│                          └──┘                          │
+│                     CODE-THON                          │
+│                                                         │
+│   14   15    16    17    18    19    20                │
+│                                                         │
+│   21   22    23    24    25    26    27                │
+│        ┌──┐            ┌──┐                           │
+│        │22│            │25│                           │
+│        └──┘            └──┘                           │
+│      PAPER       HACKFEST (Deadline)                  │
+│                                                         │
+│   28   29    30     1     2     3     4                │
+│   ┌──┐                                                │
+│   │28│                                                │
+│   └──┘                                                │
+│  HACKFEST                                             │
+│  (Start)                                              │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📊 Analytics View
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Analytics & Insights                                   │
+│  Track your event participation and performance         │
+├─────────────────────────────────────────────────────────┤
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐ │
+│  │Total     │  │Events    │  │Prize     │  │  ROI   │ │
+│  │Events    │  │Won       │  │Won       │  │        │ │
+│  │   50     │  │   12     │  │ ₹150K    │  │ +250%  │ │
+│  │          │  │ 24% rate │  │          │  │        │ │
+│  └──────────┘  └──────────┘  └──────────┘  └────────┘ │
+├─────────────────────────────────────────────────────────┤
+│  Events by Type              Events by Status          │
+│  ┌────────────────────┐      ┌────────────────────┐   │
+│  │ Hackathon    ████  │      │ Open         ████  │   │
+│  │ Paper Pres   ██    │      │ Attended     ██    │   │
+│  │ Workshop     ███   │      │ Won          █     │   │
+│  │ Contest      ██    │      │ Closed       ███   │   │
+│  └────────────────────┘      └────────────────────┘   │
+├─────────────────────────────────────────────────────────┤
+│  Financial Overview          Event Mode               │
+│  • Total Prize Pool: ₹500K   • Online:  30 (60%)     │
+│  • Total Fees Paid:  ₹15K    • Offline: 20 (40%)     │
+│  • Average Prize:    ₹10K                            │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## ⚙️ Settings View
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Settings                                               │
+│  Manage your preferences and data                       │
+├─────────────────────────────────────────────────────────┤
+│  Appearance                                             │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ Theme                    [🌙 Dark Mode]         │   │
+│  └─────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────┤
+│  Notifications                                          │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ Enable Notifications     [ON ●────]             │   │
+│  │ Deadline Reminder Days   [7, 3, 1, 0]          │   │
+│  │ Event Reminder Days      [1]                    │   │
+│  └─────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────┤
+│  Data Management                                        │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ Export Events            [📥 Export CSV]        │   │
+│  │ Clear All Data           [🗑️ Clear All]        │   │
+│  └─────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────┤
+│  About                                                  │
+│  Version: 1.0.0 | Type: PWA | Storage: IndexedDB       │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## ➕ Add Event Modal
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Add New Event                                    [✕]   │
+├─────────────────────────────────────────────────────────┤
+│  Event Name *         College Name *                    │
+│  [CODE-THON '24]      [ABC Engineering College]        │
+│                                                         │
+│  Event Type *                                           │
+│  [Hackathon ▼]                                         │
+│                                                         │
+│  Registration Deadline *  Start Date *  End Date *      │
+│  [2024-04-25]            [2024-05-10]  [2024-05-11]   │
+│                                                         │
+│  Prize Amount (₹)        Registration Fee (₹)          │
+│  [50000]                 [500]                         │
+│                                                         │
+│  Location                Team Size                      │
+│  [Bangalore]             [4]                           │
+│                                                         │
+│  ☑ Online Event          ☑ Accommodation Provided      │
+│                                                         │
+│  Contact Numbers (comma-separated)                      │
+│  [9876543210, 9876543211]                              │
+│                                                         │
+│  Website / Registration Link                            │
+│  [https://example.com/register]                        │
+│                                                         │
+│  Poster URL                                             │
+│  [https://example.com/poster.jpg]                      │
+│                                                         │
+│  Description                                            │
+│  [24-hour coding marathon...]                          │
+│                                                         │
+│  Eligibility                                            │
+│  [B.Tech students]                                     │
+├─────────────────────────────────────────────────────────┤
+│                          [Cancel] [Add Event]           │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📥 Import CSV Modal
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Import from CSV                                  [✕]   │
+├─────────────────────────────────────────────────────────┤
+│  Upload a CSV file exported from Excel or Google        │
+│  Sheets. The system will automatically detect and       │
+│  map columns.                                           │
+│                                                         │
+│  Expected Columns:                                      │
+│  • College Name, Event Name, Event Type                │
+│  • Registration Deadline, Start Date, End Date          │
+│  • Prize, Fee, Location, Contact, etc.                 │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │                                                 │   │
+│  │              📊 events.csv                      │   │
+│  │              12.5 KB                            │   │
+│  │                                                 │   │
+│  │     Click to upload CSV file                    │   │
+│  │     or drag and drop                            │   │
+│  │                                                 │   │
+│  └─────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────┤
+│                          [Cancel] [Import Events]       │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔍 Event Details Modal
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Event Details                                    [✕]   │
+├─────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────┐   │
+│  │                                                 │   │
+│  │         [Event Poster Image]                    │   │
+│  │                                                 │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  CODE-THON '24                                          │
+│  ABC Engineering College                                │
+│                                                         │
+│  [Hackathon] [Open] [Priority: 85]                     │
+│                                                         │
+│  📅 Registration Deadline: April 25, 2024               │
+│  📅 Event Dates: May 10 - May 11, 2024                 │
+│  📍 Location: Bangalore                                 │
+│  🏆 Prize Money: ₹50,000                                │
+│  💰 Registration Fee: ₹500                              │
+│  👥 Team Size: 4 members                                │
+│                                                         │
+│  Description                                            │
+│  24-hour coding marathon with exciting prizes...       │
+│                                                         │
+│  Eligibility                                            │
+│  B.Tech students                                        │
+│                                                         │
+│  Contact                                                │
+│  9876543210, 9876543211                                │
+│                                                         │
+│  🔗 Visit Event Website                                 │
+│                                                         │
+│  Update Status                                          │
+│  [Open] [Closed] [Attended] [Won]                      │
+├─────────────────────────────────────────────────────────┤
+│  [🗑️ Delete Event]                          [Close]    │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔔 Notification Examples
+
+```
+┌─────────────────────────────────────┐
+│  College Event Manager              │
+├─────────────────────────────────────┤
+│  Deadline in 3 days                 │
+│  CODE-THON '24 - ABC Engineering    │
+│  College                            │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│  College Event Manager              │
+├─────────────────────────────────────┤
+│  Deadline Today                     │
+│  HACKFEST '26 - DEF College of      │
+│  Science                            │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│  College Event Manager              │
+├─────────────────────────────────────┤
+│  Event Tomorrow                     │
+│  CODE-THON '24 starts in 1 day      │
+└─────────────────────────────────────┘
+```
+
+---
+
+## 📱 Mobile View
+
+```
+┌───────────────────┐
+│ Event Manager  ☰  │
+├───────────────────┤
+│                   │
+│  Welcome back! 👋 │
+│                   │
+│ ┌───────────────┐ │
+│ │ Upcoming: 12  │ │
+│ └───────────────┘ │
+│ ┌───────────────┐ │
+│ │ Deadline: 2   │ │
+│ └───────────────┘ │
+│                   │
+│ ⚠️ DEADLINE TODAY │
+│ ┌───────────────┐ │
+│ │[P] CODE-THON  │ │
+│ │    ABC Eng    │ │
+│ │    [85]       │ │
+│ └───────────────┘ │
+│                   │
+│ 🔥 HIGH PRIORITY  │
+│ ┌───────────────┐ │
+│ │[P] HACKFEST   │ │
+│ │    DEF Sci    │ │
+│ │    [90]       │ │
+│ └───────────────┘ │
+│                   │
+├───────────────────┤
+│ 🏠 📋 📅 📊      │
+└───────────────────┘
+```
+
+---
+
+## 🎨 Color Coding
+
+### Status Badges
+- **Open**: 🟢 Green
+- **Deadline Today**: 🔴 Red (pulsing)
+- **Closed**: ⚫ Gray
+- **Completed**: 🔵 Blue
+- **Attended**: 🟣 Purple
+- **Won**: 🟡 Yellow
+
+### Priority Scores
+- **90-100**: 🔴 Red gradient (High)
+- **70-89**: 🟠 Orange gradient (High)
+- **40-69**: 🟡 Yellow gradient (Medium)
+- **0-39**: 🔵 Blue gradient (Low)
+
+---
+
+## 🔄 User Flow Examples
+
+### Flow 1: Adding First Event
+```
+Open App → Dashboard → Add Event Button → 
+Fill Form → Submit → Event Added → 
+Dashboard Updates → Notification Scheduled
+```
+
+### Flow 2: Importing from Excel
+```
+Export Excel to CSV → Open App → Import Button → 
+Select CSV → Auto-mapping → Confirm → 
+Bulk Import → Success Message → View Events
+```
+
+### Flow 3: Finding High-Priority Events
+```
+Open App → Dashboard → View High Priority Section → 
+Click Event Card → View Details → 
+Check Website → Register
+```
+
+### Flow 4: Tracking Performance
+```
+Open App → Analytics → View Win Rate → 
+Check ROI → Analyze Event Types → 
+Make Data-Driven Decisions
+```
+
+---
+
+**Visual Guide Version**: 1.0.0  
+**Last Updated**: 2026-02-07

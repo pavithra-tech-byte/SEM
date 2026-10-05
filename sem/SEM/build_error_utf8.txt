@@ -1,0 +1,53 @@
+﻿
+> sem-student-event-manager@1.0.0 build
+> vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 2223 modules transformed.
+
+PWA v0.17.5
+mode      generateSW
+precache  37 entries (6569.99 KiB)
+files generated
+  dist\sw.js
+  dist\workbox-1d305bb8.js
+npm.cmd : warnings
+At line:1 char:1
++ npm.cmd run build > build_error.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warnings:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  logo.png is 6.76 MB, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
+
+[31mx[39m Build failed in 8.45s
+[31merror during build:
+[31m[vite-plugin-pwa:build] There was an error during the build:
+  src/components/EventList.jsx (4:37): "exportEventsToCSV" is not exported by "src/db.js", imported by 
+"src/components/EventList.jsx".
+Additionally, handling the error in the 'buildEnd' hook caused the following error:
+  src/components/EventList.jsx (4:37): "exportEventsToCSV" is not exported by "src/db.js", imported by 
+"src/components/EventList.jsx".[31m
+file: [36mC:/Users/jagad/OneDrive/Documents/PROJECT FILES_BP/ANTIGRAVITY APP 
+FILES/SEM/src/components/EventList.jsx:4:37[31m
+[33m
+2: import { useLiveQuery } from 'dexie-react-hooks';
+3: import { motion, AnimatePresence } from 'framer-motion';
+4: import { db, EventType, EventStatus, exportEventsToCSV } from '../db';
+                                        ^
+5: import { useAppStore } from '../store';
+6: import EventCard from './EventCard';
+[31m
+    at getRollupError (file:///C:/Users/jagad/OneDrive/Documents/PROJECT%20FILES_BP/ANTIGRAVITY%20APP%20FILES/SEM/node_
+modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at file:///C:/Users/jagad/OneDrive/Documents/PROJECT%20FILES_BP/ANTIGRAVITY%20APP%20FILES/SEM/node_modules/rollup/d
+ist/es/shared/node-entry.js:23444:39
+    at async catchUnfinishedHookActions (file:///C:/Users/jagad/OneDrive/Documents/PROJECT%20FILES_BP/ANTIGRAVITY%20APP
+%20FILES/SEM/node_modules/rollup/dist/es/shared/node-entry.js:22902:16)
+    at async rollupInternal (file:///C:/Users/jagad/OneDrive/Documents/PROJECT%20FILES_BP/ANTIGRAVITY%20APP%20FILES/SEM
+/node_modules/rollup/dist/es/shared/node-entry.js:23427:5)
+    at async build (file:///C:/Users/jagad/OneDrive/Documents/PROJECT%20FILES_BP/ANTIGRAVITY%20APP%20FILES/SEM/node_mod
+ules/vite/dist/node/chunks/dep-BK3b2jBa.js:65709:14)
+    at async CAC.<anonymous> (file:///C:/Users/jagad/OneDrive/Documents/PROJECT%20FILES_BP/ANTIGRAVITY%20APP%20FILES/SE
+M/node_modules/vite/dist/node/cli.js:829:5)[39m

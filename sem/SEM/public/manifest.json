@@ -1,0 +1,54 @@
+{
+    "name": "SEM Student Event Manager",
+    "short_name": "SEM",
+    "description": "Offline-first event management for students — track hackathons, contests, and workshops.",
+    "start_url": "/",
+    "display": "standalone",
+    "display_override": ["window-controls-overlay", "standalone", "browser"],
+    "background_color": "#0f172a",
+    "theme_color": "#4f46e5",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "categories": ["education", "productivity"],
+    "icons": [
+        {
+            "src": "/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/posters/generic.png",
+            "sizes": "640x480",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "SEM Dashboard — Track all your events"
+        },
+        {
+            "src": "/posters/hackathon.png",
+            "sizes": "390x844",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "SEM on Mobile — Events at a glance"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Add Event",
+            "short_name": "Add",
+            "description": "Quickly add a new event",
+            "url": "/?action=add",
+            "icons": [{ "src": "/icon.svg", "sizes": "any" }]
+        },
+        {
+            "name": "View Calendar",
+            "short_name": "Calendar",
+            "description": "Open the event calendar",
+            "url": "/calendar",
+            "icons": [{ "src": "/icon.svg", "sizes": "any" }]
+        }
+    ]
+}

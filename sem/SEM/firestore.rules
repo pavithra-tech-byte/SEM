@@ -1,0 +1,146 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --------- Helpers ---------
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    // Safely get user document fields without failing on null
+    function getUserData() {
+      return exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data
+        : {"role": "public", "teamId": null};
+    }
+
+    function isAdmin() {
+      return getUserData().role == "admin";
+    }
+
+    function isEventManager() {
+      return getUserData().role == "event_manager" || isAdmin();
+    }
+
+    function getTeamId() {
+      return getUserData().teamId;
+    }
+
+    // --------- Global & Personal Events ---------
+    match /events/{eventId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update, delete: if isEventManager() || (resource != null && resource.data.createdBy == request.auth.uid);
+    }
+
+    // --------- Users ---------
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isOwner(userId) && (
+                      request.resource.data.role == "public" || 
+                      (request.resource.data.email == "jagadish2k2006@gmail.com" && request.resource.data.role == "admin")
+                    );
+      
+      allow update: if isAdmin() || (
+                      isOwner(userId) && (
+                        // Protect roles and emails from self-modification
+                        request.resource.data.get('role', 'public') == resource.data.get('role', 'public') &&
+                        request.resource.data.get('email', '') == resource.data.get('email', '')
+                      )
+                    ) || (
+                      // (A) Team leader updating member position
+                      isSignedIn() && 
+                      resource.data.get('teamId', '') == request.auth.uid && 
+                      request.resource.data.diff(resource.data).affectedKeys().hasOnly(['position'])
+                    ) || (
+                      // (B) Team leader inducting a member (approving join request)
+                      isSignedIn() &&
+                      request.resource.data.get('teamId', '') == request.auth.uid &&
+                      request.resource.data.get('role', '') == 'member' &&
+                      (resource.data.get('teamId', '') == userId || resource.data.get('teamId', '') == '') &&
+                      request.resource.data.diff(resource.data).affectedKeys().hasOnly(['teamId', 'role'])
+                    ) || (
+                      // (C) Team leader removing a member or disbanding (demoting role and resetting teamId)
+                      isSignedIn() &&
+                      resource.data.get('teamId', '') == request.auth.uid &&
+                      request.resource.data.get('teamId', '') == userId &&
+                      request.resource.data.get('position', '') == 'Explorer' &&
+                      (request.resource.data.get('role', 'public') == 'public' || request.resource.data.get('role', 'public') == resource.data.get('role', 'public')) &&
+                      request.resource.data.diff(resource.data).affectedKeys().hasOnly(['teamId', 'position', 'role'])
+                    );
+
+      allow delete: if isAdmin();
+    }
+
+    // --------- Team Event Data (private performance stats) ---------
+    match /teamEventData/{docId} {
+      function isMemberOfTeam(targetTeamId) {
+        return targetTeamId == request.auth.uid || targetTeamId == getTeamId();
+      }
+
+      allow read: if isSignedIn() && (isMemberOfTeam(resource.data.teamId) || isAdmin());
+      allow create: if isSignedIn() && isMemberOfTeam(request.resource.data.teamId);
+      allow update: if isSignedIn() && isMemberOfTeam(resource.data.teamId);
+      allow delete: if isAdmin() || (isSignedIn() && isMemberOfTeam(resource.data.teamId));
+    }
+
+    // --------- Team Join Requests ---------
+    match /team_requests/{requestId} {
+      allow read: if isSignedIn() && (
+        resource.data.userId == request.auth.uid ||
+        resource.data.teamId == request.auth.uid ||
+        isAdmin()
+      );
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isSignedIn() && (
+        resource.data.teamId == request.auth.uid || 
+        isAdmin()
+      );
+    }
+
+    // --------- Team Messages (Chat Board) ---------
+    match /team_messages/{messageId} {
+      function isMemberOfTeam(tid) {
+        return tid == request.auth.uid || tid == getTeamId();
+      }
+      
+      // Data-level security: Users can only read messages from their own team
+      allow read: if isSignedIn() && (resource.data.teamId == request.auth.uid || resource.data.teamId == getTeamId() || isAdmin());
+      allow create: if isSignedIn() && isMemberOfTeam(request.resource.data.teamId);
+      allow update, delete: if isAdmin() || (resource != null && resource.data.senderId == request.auth.uid);
+    }
+
+    // --------- Individual Notes ---------
+    match /notes/{noteId} {
+      allow read, write: if isSignedIn() && (
+        (resource != null && resource.data.createdBy == request.auth.uid) ||
+        (request.resource != null && request.resource.data.createdBy == request.auth.uid)
+      );
+    }
+
+    // --------- Colleges ---------
+    match /colleges/{collegeId} {
+      allow read: if isSignedIn();
+      allow write: if isEventManager();
+    }
+
+    // --------- Payment Requests ---------
+    match /payment_requests/{requestId} {
+      allow create: if isSignedIn() && 
+                    request.resource.data.userId == request.auth.uid && 
+                    request.resource.data.status == "pending";
+      allow read: if isAdmin() || (resource != null && resource.data.userId == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // --------- System Settings ---------
+    match /settings/{settingId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+  }
+}
